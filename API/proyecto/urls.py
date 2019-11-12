@@ -15,7 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+from rest_framework import routers, serializers, viewsets
+from app.views import UserViewSet, CancionViewSet
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.SimpleRouter()
+router.register(r'users', UserViewSet)
+router.register(r'cancion', CancionViewSet)
+urlpatterns = router.urls
+
+
 
 urlpatterns = [
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
 ]
