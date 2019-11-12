@@ -16,10 +16,8 @@ services:
             context: ./
             dockerfile: DockerfileAPI
         ports:
-            - 8001:8001
+            - 8001:8000
         volumes:
             - ./API:/app
         tty: yes
         container_name: API
-
-    

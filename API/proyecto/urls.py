@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from rest_framework import routers, serializers, viewsets
-from app.views import UserViewSet, CancionViewSet
+from app.views import UserViewSet, CancionViewSet, ObtenerUsuario
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.SimpleRouter()
@@ -31,4 +31,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
+    path('ousuario/', ObtenerUsuario.as_view(), name="obtenerusuario"),
+
 ]
