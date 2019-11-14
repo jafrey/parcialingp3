@@ -30,13 +30,22 @@ class ObtenerUsuario(generics.ListAPIView):
     search_fields = ['username']
     filter_backends = (filters.SearchFilter,)
 
-#
+#Imports para usar json y urllib
+import json
+import requests
 
-#    def get_queryset(self):
-#        """
-#        This view should return a list of all the purchases for
-#        the user as determined by the username portion of the URL.
-#        """
-#        username = self.kwargs['username']
-#
-#        return User.objects.filter(username=username)
+
+@csrf_exempt
+def login(request):
+
+    if request.method == "GET":
+
+    	return render_to_response('login.html')
+
+    else:
+
+     usuario = request.POST['usuario']
+     contra = request.POST['contrasenia']
+
+
+     result = requests.get('http://api:8000/ousuario/?username=' + usuario)

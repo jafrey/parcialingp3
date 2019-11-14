@@ -8,15 +8,14 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
+
 #Imports para usar json y urllib
 import json
-import urllib
 import requests
 
 
-
 @csrf_exempt
-def login(request):
+def MostrarLogin(request):
 
     if request.method == "GET":
 
@@ -26,23 +25,17 @@ def login(request):
 
      usuario = request.POST['usuario']
      contra = request.POST['contrasenia']
-     contra = make_password(contra)
 
 
-     url = 'http://api:8001/ousuario/?search=' + usuario
+    # result = requests.post('http://api:8000/ousuario/?username=' + usuario + '&'+)
 
-     response = requests.get(url)
-     jsonData = json.loads(response.text)
-
-     if jsonData == '[]':
-
-            return render_to_response('login.html')
-
-     else:
-
-         jsonData = json.loads(data)
+    r = requests.post("http://api:8000/login", data={'username': usuario, 'password': contra})
+    print(r.status_code, r.reason)
 
 
-     if usuario == jsonData[username] and contra == jsonData[password]:
 
-                return render_to_response('principal.html')
+
+
+
+
+    # return render_to_response('principal.html', { 'usuario' : result.text })
